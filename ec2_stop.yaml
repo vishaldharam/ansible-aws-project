@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+
+  tasks: 
+    #- name: Print all the ansible Gather ansible_facts
+    #  ansible.builtin.debug: 
+    #    var: ansible_facts
+    - name: Shutdown amazon linux instances only
+      ansible.builtin.command: /sbin/shutdown -t now
+      when:
+        ansible_facts['os_family'] == "RedHat"
