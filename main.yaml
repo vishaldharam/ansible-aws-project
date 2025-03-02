@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Create an three ec2 instances
+      amazon.aws.ec2_instance:
+        name: "{{ item.name }}"
+        key_name: asia-key-pair
+        instance_type: t3.micro # Use a supported instance type
+        security_group: launch-wizard-1
+        region: ap-south-1
+        aws_secret_key: "{{ ansible_aws_secret_key }}"
+        aws_access_key: "{{ ansible_aws_access_key }}"
+        network:
+          assign_public_ip: yes
+        image_id: "{{ item.image }}" # Use a supported AMI in eu-north-1
+      loop:
+        - { image: ami-0d682f26195e9ec0f, name: amazon-ubuntu-ansible-1 }
+        - { image: ami-0d682f26195e9ec0f, name: amazon-ubuntu-ansible-2 }
+        - { image: ami-02ddb77f8f93ca4ca, name: redhat-ubuntu-ansible-1 }
