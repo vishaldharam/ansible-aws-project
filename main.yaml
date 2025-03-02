@@ -14,7 +14,7 @@
         aws_access_key: "{{ ansible_aws_access_key }}"
         network:
           assign_public_ip: yes
-        image_id: "{{ item.image }}" # Use a supported AMI in eu-north-1
+        image_id: "{{ item.image }}" # Use a supported AMI in ap-south-1
       loop:
         - { image: ami-0d682f26195e9ec0f, name: amazon-ubuntu-ansible-1 }
         - { image: ami-0d682f26195e9ec0f, name: amazon-ubuntu-ansible-2 }
